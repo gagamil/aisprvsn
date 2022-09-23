@@ -30,6 +30,9 @@ TimescaleDB and PostgreSQL. Only the data in the CSV files attached should be us
 
 ## Considerations
 
+Import data via the admin (import export lib).
+preformat - add symbol col.
+
 The app logic is relatively simple. Basically only data fetching as is (unless I misunderstood the requirements).
 Thus no real design is needed. The request/response cycle is short and no additional layers are required for the business logic.
 
