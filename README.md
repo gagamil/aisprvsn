@@ -37,7 +37,7 @@ Thus no real design is needed. The request/response cycle is short and no additi
 
 ### List stocks
 
-/ninja/stocks
+/api/stocks
 
 #### Filter by date range
 
@@ -50,7 +50,7 @@ Use qs ticker
 
 ### Get a stock
 
-/ninja/stocks/<id>
+/api/stocks/<id>
 
 ### Get price history for a stock between two dates
 
