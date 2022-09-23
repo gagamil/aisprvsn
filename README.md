@@ -25,7 +25,7 @@ TimescaleDB and PostgreSQL. Only the data in the CSV files attached should be us
 1. Look into the csv files and get the initial idea of the task size and complexity.
 2. Create the raw Django project and add the basic libraries necessary for data import and processing (runtime).
 3. Import the data and ensure it is in the DB via the admin.
-4. Add UnitTests for the first 4 api endpoints and implement these.
+4. Add UnitTests for the first api endpoints and implement these.
 5. Meet the requirements - use Postgres and TDB, dockerize (TODO)
 
 ## Considerations
