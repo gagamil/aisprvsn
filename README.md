@@ -33,6 +33,31 @@ TimescaleDB and PostgreSQL. Only the data in the CSV files attached should be us
 The app logic is relatively simple. Basically only data fetching as is (unless I misunderstood the requirements).
 Thus no real design is needed. The request/response cycle is short and no additional layers are required for the business logic.
 
+## Requirements - endpoints
+
+### List stocks
+
+/ninja/stocks
+
+#### Filter by date range
+
+Use qs date_from and date_till.
+If both params equal then filtering within the same day.
+
+#### Filterby ticker (symbol)
+
+Use qs ticker
+
+### Get a stock
+
+/ninja/stocks/<id>
+
+### Get price history for a stock between two dates
+
+### Get price at a point for a stock on a day
+
+Satisfied via filters in the list endpoint. If not, pls add more description (need feedback).
+
 ## Concerns & Improvements
 
 1. Import data using the current strucure or preprocess files (add col with ticker).
