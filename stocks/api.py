@@ -14,10 +14,12 @@ class StockValueSchema(ModelSchema):
 
 @api.get("/stocks", response=List[StockValueSchema], url_name='api-get-list-stocks')
 @paginate
-def list_stocks(request, date_from: date = '', date_till:date = '',):
+def list_stocks(request, date_from: date = '', date_till:date = '', ticker:str = ''):
     qs = StockValue.objects.all()
     if date_from and date_till:
         qs = qs.filter(date__range=[date_from, date_till])
+    if ticker:
+        qs = qs.filter(ticker=ticker)
     return qs
 
 
