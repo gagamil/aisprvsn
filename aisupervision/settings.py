@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     # 3rd party
     'django_filters',
     'import_export',
-    'rest_framework',
+    'ninja',
 
     # custom
     'stocks',
