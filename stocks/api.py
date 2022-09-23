@@ -1,6 +1,8 @@
+from datetime import date
+from typing import List
+from django.shortcuts import get_object_or_404
 from ninja import NinjaAPI, ModelSchema
 from ninja.pagination import paginate
-from typing import List
 from .models import StockValue
 
 api = NinjaAPI()
@@ -12,7 +14,7 @@ class StockValueSchema(ModelSchema):
 
 @api.get("/stocks", response=List[StockValueSchema], url_name='api-get-list-stocks')
 @paginate
-def list_stocks(request, date_from: str = '', date_till:str = '',):
+def list_stocks(request, date_from: date = '', date_till:date = '',):
     qs = StockValue.objects.all()
     if date_from and date_till:
         qs = qs.filter(date__range=[date_from, date_till])
@@ -21,5 +23,4 @@ def list_stocks(request, date_from: str = '', date_till:str = '',):
 
 @api.get("/stocks/{record_id}", response=StockValueSchema, url_name='api-get-detail-stock')
 def read_item(request, record_id):
-    stock = StockValue.objects.get(pk=record_id)
-    return stock
+    return get_object_or_404(StockValue, id=record_id)
