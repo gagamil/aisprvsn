@@ -66,3 +66,4 @@ Satisfied via filters in the list endpoint. If not, pls add more description (ne
 1. Import data using the current strucure or preprocess files (add col with ticker).
 2. Add model for the company to dynamically import values for any Company
 3. Import data to dedicated Import table which will launch cleaning logic (conflicting data) in background mode. Afterwards this will populate the Stock data which is considered as valid and ready to be used by the main logic (statistical app?).
+4. Probably store values as integers - the least possible denominator (cents).
