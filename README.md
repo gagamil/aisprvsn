@@ -6,7 +6,7 @@
 
 Number of csv files with some structured data.
 
-### Desription
+## Challenge Desription
 
 The task is to create an API for browsing financial stock data. The api should contain the
 following functionality:
@@ -31,10 +31,16 @@ TimescaleDB and PostgreSQL. Only the data in the CSV files attached should be us
 ## Considerations
 
 Import data via the admin (import export lib).
-preformat - add symbol col.
+preformat - add symbol col to associate the data with a company (symbol).
 
 The app logic is relatively simple. Basically only data fetching as is (unless I misunderstood the requirements).
 Thus no real design is needed. The request/response cycle is short and no additional layers are required for the business logic.
+
+### Sync/Async tasks
+
+However separated data import from the clean data itself using build in signals.
+Currently runs synchonously.
+If the app evolves and it will be clear that the runtime env of the both app parts have different footprint the monolithic app can be either decoupled or some logic could be wrapped in uwsgi spoolers thus processed in async mode.
 
 ## Requirements - endpoints
 
@@ -65,5 +71,3 @@ Satisfied via filters in the list endpoint. If not, pls add more description (ne
 
 1. Import data using the current strucure or preprocess files (add col with ticker).
 2. Add model for the company to dynamically import values for any Company
-3. Import data to dedicated Import table which will launch cleaning logic (conflicting data) in background mode. Afterwards this will populate the Stock data which is considered as valid and ready to be used by the main logic (statistical app?).
-4. Probably store values as integers - the least possible denominator (cents).
