@@ -1,4 +1,5 @@
 from django.db import models
+from common.models import BaseModelMixin
 
 
 STCK_SYMBOL__GOOG = 'GOOG'
@@ -13,7 +14,8 @@ STCK_SYMBOL__CHOICES = (
                        )
 
 
-class StockValue(models.Model):
+
+class StockValue(BaseModelMixin):
     ticker = models.CharField(choices=STCK_SYMBOL__CHOICES, max_length=5)
     date = models.DateField()
     value_open = models.DecimalField(max_digits=13, decimal_places=6, blank=True, null=True)
@@ -25,3 +27,6 @@ class StockValue(models.Model):
 
     def __str__(self):
         return f'{self.ticker}, {self.date}'
+
+    class Meta:
+        unique_together = ('ticker', 'date')
