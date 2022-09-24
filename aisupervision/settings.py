@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'ninja',
 
     # custom
+    'common',
+    'importdata',
     'stocks',
 ]
 
