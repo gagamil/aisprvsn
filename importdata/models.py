@@ -3,6 +3,7 @@ from django.db import models
 from common.models import BaseModelMixin
 from common.signals import sig_send__stockdata_import_done
 from common.data import StockData
+from common.const import DECIMAL_PLACES_MULTIPLIER
 
 class StockValueImportData(BaseModelMixin):
     '''
@@ -25,11 +26,11 @@ class StockValueImportData(BaseModelMixin):
         stock_data_object = StockData(
                                         id=self.pk,
                                         ticker=self.ticker,
-                                        value_open=self.value_open,
-                                        value_high=self.value_high,
-                                        value_low=self.value_low,
-                                        value_close=self.value_close,
-                                        value_adjclose=self.value_adjclose,
+                                        value_open=self.value_open * DECIMAL_PLACES_MULTIPLIER,
+                                        value_high=self.value_high * DECIMAL_PLACES_MULTIPLIER,
+                                        value_low=self.value_low * DECIMAL_PLACES_MULTIPLIER,
+                                        value_close=self.value_close * DECIMAL_PLACES_MULTIPLIER,
+                                        value_adjclose=self.value_adjclose * DECIMAL_PLACES_MULTIPLIER,
                                         volume=self.volume
                                     )
         sig_send__stockdata_import_done(sender=self, sender_pk=self.pk, stockdata=stock_data_object)
