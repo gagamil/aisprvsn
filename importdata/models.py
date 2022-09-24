@@ -1,7 +1,8 @@
 from django.db import models
 
 from common.models import BaseModelMixin
-
+from common.signals import sig_send__stockdata_import_done
+from common.data import StockData
 
 class StockValueImportData(BaseModelMixin):
     '''
@@ -18,3 +19,18 @@ class StockValueImportData(BaseModelMixin):
 
     def __str__(self):
         return f'{self.ticker}, {self.date}'
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        stock_data_object = StockData(
+                                        id=self.pk,
+                                        ticker=self.ticker,
+                                        value_open=self.value_open,
+                                        value_high=self.value_high,
+                                        value_low=self.value_low,
+                                        value_close=self.value_close,
+                                        value_adjclose=self.value_adjclose,
+                                        volume=self.volume
+                                    )
+        sig_send__stockdata_import_done(sender=self, sender_pk=self.pk, stockdata=stock_data_object)
+        return
