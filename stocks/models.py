@@ -16,14 +16,18 @@ STCK_SYMBOL__CHOICES = (
 
 
 class StockValue(BaseModelMixin):
+    '''
+    - ticker <-> symbol
+    - all the value_ prefixed values are presented in the least possible denominatios (cents)
+    '''
     ticker = models.CharField(choices=STCK_SYMBOL__CHOICES, max_length=5)
     date = models.DateField()
-    value_open = models.DecimalField(max_digits=13, decimal_places=6, blank=True, null=True)
-    value_high = models.DecimalField(max_digits=13, decimal_places=6, blank=True, null=True)
-    value_low = models.DecimalField(max_digits=13, decimal_places=6, blank=True, null=True)
-    value_close = models.DecimalField(max_digits=13, decimal_places=6, blank=True, null=True)
-    value_adjclose = models.DecimalField(max_digits=13, decimal_places=6, blank=True, null=True)
-    volume = models.PositiveIntegerField(blank=True, null=True)
+    value_open = models.PositiveIntegerField()
+    value_high = models.PositiveIntegerField()
+    value_low = models.PositiveIntegerField()
+    value_close = models.PositiveIntegerField()
+    value_adjclose = models.PositiveIntegerField()
+    volume = models.PositiveIntegerField()
 
     def __str__(self):
         return f'{self.ticker}, {self.date}'
