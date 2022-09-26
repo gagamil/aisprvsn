@@ -70,4 +70,7 @@ Satisfied via filters in the list endpoint. If not, pls add more description (ne
 ## Concerns & Improvements
 
 1. Import data using the current strucure or preprocess files (add col with ticker).
-2. Add model for the company to dynamically import values for any Company
+2. Use cookiecutter to bootstrap a production ready project config.
+3. Implements some stats functionality (ORM aggregates or https://github.com/pennersr/django-trackstats)
+4. Add ActionStreams for logging peurpose if needed
+5. Tune as per performance reqiuerments and profiling.
