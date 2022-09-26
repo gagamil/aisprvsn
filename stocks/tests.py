@@ -7,8 +7,8 @@ from django.urls import reverse
 from django.test import TestCase
 from rest_framework.test import APITestCase
 
-from common.const import DECIMAL_PLACES_MULTIPLIER
-from .models import StockValue, STCK_SYMBOL__GOOG, StockSymbol
+from common.const import DECIMAL_PLACES_MULTIPLIER, STCK_SYMBOL__GOOG
+from .models import StockValue, StockSymbol
 from .factory import StockValueFactory
 
 
