@@ -1,9 +1,13 @@
+import logging
 from django.db import models
 
 from common.models import BaseModelMixin
 from common.signals import sig_send__stockdata_import_done
 from common.data import StockData
 from common.const import DECIMAL_PLACES_MULTIPLIER
+
+logger = logging.getLogger(__name__)
+
 
 class StockValueImportData(BaseModelMixin):
     '''
@@ -26,6 +30,7 @@ class StockValueImportData(BaseModelMixin):
         stock_data_object = StockData(
                                         id=self.pk,
                                         ticker=self.ticker,
+                                        date=self.date,
                                         value_open=self.value_open * DECIMAL_PLACES_MULTIPLIER,
                                         value_high=self.value_high * DECIMAL_PLACES_MULTIPLIER,
                                         value_low=self.value_low * DECIMAL_PLACES_MULTIPLIER,
