@@ -15,12 +15,20 @@ STCK_SYMBOL__CHOICES = (
 
 
 
+class StockSymbol(BaseModelMixin):
+    symbol = models.CharField(max_length=5)
+
+    def __str__(self) -> str:
+        return self.symbol
+
+
 class StockValue(BaseModelMixin):
     '''
-    - ticker <-> symbol
+    - ticker __ Deprecated - use only to allow default Django admin imports.
     - all the value_ prefixed values are presented in the least possible denominatios (cents)
     '''
-    ticker = models.CharField(choices=STCK_SYMBOL__CHOICES, max_length=5)
+    symbol = models.ForeignKey(StockSymbol, on_delete=models.PROTECT)
+    ticker = models.CharField(choices=STCK_SYMBOL__CHOICES, max_length=5, db_index=True)
     date = models.DateField()
     value_open = models.PositiveIntegerField()
     value_high = models.PositiveIntegerField()

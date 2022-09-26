@@ -8,7 +8,7 @@ from django.test import TestCase
 from rest_framework.test import APITestCase
 
 from common.const import DECIMAL_PLACES_MULTIPLIER
-from .models import StockValue, STCK_SYMBOL__GOOG
+from .models import StockValue, STCK_SYMBOL__GOOG, StockSymbol
 from .factory import StockValueFactory
 
 
@@ -56,13 +56,14 @@ def get_floor_celeing_delta(*, base_value: int =0) -> FloorCeleingTestValue:
 class SimpleStockCRUDAPITestCase(APITestCase):
     def setUp(self):
         today = timezone.now() # caution - will work if the rest is created the same day (12:59:59 might fail)
-        
-        ticker = STCK_SYMBOL__GOOG
+
         values = get_floor_celeing_delta()
         base_value = values.base
+        ss, _ = StockSymbol.objects.get_or_create(symbol=STCK_SYMBOL__GOOG)
         for i in range(9):
             StockValueFactory(
-                                ticker=ticker,
+                                ticker=STCK_SYMBOL__GOOG,
+                                symbol=ss,
                                 date=today-timedelta(days=i),
                                 value_open = values.val_open,
                                 value_high = values.val_celeing,
