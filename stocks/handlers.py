@@ -1,4 +1,5 @@
 import logging
+from dataclasses import asdict
 from django.dispatch import receiver
 
 from common.signals import stockdata_import_done
@@ -16,6 +17,6 @@ def new_batch_imported(sender, **kwargs):
     stockdata = kwargs['stockdata']
     logger.debug(f'New StockValue will be created in handler. {stockdata.ticker=} {stockdata.date=}')
     try:
-        StockValue.objects.create(**stockdata)
+        StockValue.objects.create(**asdict(stockdata))
     except Exception as exc:
         logger.error(f'During StockValue creation an exception occured: {exc}')
